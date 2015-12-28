@@ -16,18 +16,19 @@ module control_unit
 	input	clock,
 	input	reset,
 	input	UARTstart,
-//	input	[8:0]FIFOreadyRows,
 	input	FIFOready,
 	input	PEmatch,
 	input	UARTsendComplete,
 	output reg	[8:0]RAMtoRead,
 	output	[11:0]ROMtoRead,
+	output	PEreset,
 	output reg	PEshift,
 	output reg	[1:0]UARTsend
 );
 
 	reg	[2:0]state,nextState;
-	reg	[8:0]currentRow;
+	reg	[8:0]currentRow,
+			 nextRow;
 	reg [6:0]rowTemplate;
 	reg [5:0]colTemplate;
 	wire	processFinished;
@@ -62,21 +63,26 @@ module control_unit
 	end
 
 	/**** OUTPUT HANDLING ****/
-	/** processFinished **/
+	/** processFinishedImm, processFinished, and PEreset **/
 	assign processFinished = (ROMtoRead >= 12'd3999) || (!PEmatch);
+	assign PEreset = processFinished;
 	
-	/** currentRow **/
-	always @(posedge clock)
+	/** nextRow **/
+	always @(state or currentRow or processFinished)
 	begin
 		case(state)
 			`FIRST_PROCESSING:
-				currentRow <= processFinished? 9'd1 : 9'd0;
+				nextRow <= processFinished? 9'd1 : 9'd0;
 			`NEXT_PROCESSING:
-				currentRow <= processFinished? (currentRow + 9'd1) : currentRow;
+				nextRow <= processFinished? (currentRow + 9'd1) : currentRow;
 			default:
-				currentRow <= 9'd0;
+				nextRow <= 9'd0;
 		endcase
 	end
+	
+	/** currentRow **/
+	always @(posedge clock)
+		currentRow <= nextRow;
 	
 	/** colTemplate and rowTemplate **/
 	always @(posedge clock)
@@ -101,7 +107,7 @@ module control_unit
 	begin
 		if(state == `FIRST_PROCESSING || state == `NEXT_PROCESSING)
 		begin
-			RAMtoRead <= processFinished? (currentRow)
+			RAMtoRead <= processFinished? (nextRow)
 				: (colTemplate >= 6'd39)? (RAMtoRead + 9'd1) : RAMtoRead;
 		end
 		else
@@ -109,7 +115,7 @@ module control_unit
 	end
 	
 	/** PEshift **/
-	always @(posedge clock)
+	always @(state or colTemplate)
 	begin
 		if(state == `FIRST_PROCESSING || state == `NEXT_PROCESSING)
 		begin
