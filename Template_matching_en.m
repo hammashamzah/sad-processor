@@ -1,15 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Template Matching
 %
-%PART1ÅFGray scaling&Binarization
-%PART2ÅFMatching process for SAD(Sum of Absolute Difference)
-%PART3ÅFDrawing matching point
+%PART1ÔøΩFGray scaling&Binarization
+%PART2ÔøΩFMatching process for SAD(Sum of Absolute Difference)
+%PART3ÔøΩFDrawing matching point
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Initialization
 clear all;
-%Matching ThresholdÅFRegarded as being matched being matched if SAD is smaller than "thres"
+%Matching ThresholdÔøΩFRegarded as being matched being matched if SAD is smaller than "thres"
 thres=500;
 
 %input image data
@@ -29,7 +29,7 @@ X=fprintf('Template image size is %dx%d\n',tmpsize(2),tmpsize(1));
 
 %--------------------------------------------------------------------------
 
-%PART1ÅFGray scaling&Binarization
+%PART1ÔøΩFGray scaling&Binarization
 
 disp('Part1')
 tic;
@@ -90,7 +90,7 @@ sad=zeros(imagesize(1)-tmpsize(1)+1,imagesize(2)-tmpsize(2)+1);
 toc;
 
 %--------------------------------------------------------------------------
-%PART2ÅFMatching process for SAD
+%PART2ÔøΩFMatching process for SAD
 disp('Part2')
 tic;
 
@@ -109,7 +109,7 @@ end
 toc;
 
 %--------------------------------------------------------------------------
-%PART3ÅFDrawing matching point
+%PART3ÔøΩFDrawing matching point
 
 disp('Part3')
 tic;
@@ -119,6 +119,8 @@ for sad_height = 1 : sadsize(1)
     for sad_width = 1 : sadsize(2)
         %if SAD is smaller than thres, enclosing a red line
         if sad(sad_height,sad_width)<thres
+            disp(sad_height)
+            
             for tmp_height=1:tmpsize(1)
             %left of frame border
             imagedata(sad_height+tmp_height-1,sad_width,:)=[255,0,0];

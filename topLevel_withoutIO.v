@@ -59,7 +59,7 @@ module topLevel_withoutIO
 	/** Processing Element **/
 	vertical_processor PE0(	.clk				(clock),
 							.rst				(reset),
-							.control_change_row	(PEshift),
+							.change_row			(PEshift),
 							.original			(rowData),
 							.template			(templateData),
 							.sad_status			(match),

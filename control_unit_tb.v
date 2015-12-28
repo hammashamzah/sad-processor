@@ -1,5 +1,5 @@
-module control_unit_tb();
-
+module control_unit_tb()
+;
 	reg	clk,
 		rst,
 		start,
