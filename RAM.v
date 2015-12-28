@@ -12,8 +12,8 @@ module RAM(clk, rst, data_in, data_out, wr_en,readAddr,RAM_full);
   output reg RAM_full;
      
 
-  reg[`row-1:0]      data_out;
-  reg                RAM_empty;
+  wire[`row-1:0]      data_out;
+//  reg                RAM_empty;
   reg[`addrW-1:0]    RAM_counter;
   reg[`addrW-1:0]    writeAddr;           
   // pointer to read and write addresses  
@@ -21,7 +21,7 @@ module RAM(clk, rst, data_in, data_out, wr_en,readAddr,RAM_full);
 
   always @(RAM_counter)  
   begin
-    RAM_empty = (RAM_counter==0);
+//    RAM_empty = (RAM_counter==0);
     RAM_full =  (RAM_counter== `column);
   end
 
@@ -32,13 +32,17 @@ module RAM(clk, rst, data_in, data_out, wr_en,readAddr,RAM_full);
     else if( !RAM_full && wr_en )
       RAM_counter <= RAM_counter + `addrW'd1;
   end
-
+/*
   always @( posedge clk) begin
     if( !RAM_empty )
       data_out <= ram[readAddr];
     else
       data_out <= data_out;
-  end
+  end */
+  reg [`addrW-1:0]addr;
+  always @(posedge clk)
+	addr <= readAddr;
+  assign data_out = ram[addr];
 
   always @(posedge clk) begin
     if( wr_en && !RAM_full )
