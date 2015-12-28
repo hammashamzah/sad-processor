@@ -1,9 +1,9 @@
 module original_image_rom(
-	input [8:0] addr,
-	input clk,
-	output out
+	input	[8:0]addr,
+	input	clk,
+	output	[639:0]out
 );
-	reg q;
+	reg [639:0]q;
 
 	always @(posedge clk)
 	begin

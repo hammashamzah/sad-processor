@@ -17,8 +17,7 @@ module topLevel_withoutIO
 
 	wire [8:0]	RAMtoRead;
 	wire [11:0]	ROMtoRead;
-	wire [639:0]rowData,
-				rowInput;
+	wire [639:0]rowData;
 	wire 		templateData;
 	
 	wire		match,
@@ -31,14 +30,8 @@ module topLevel_withoutIO
 	wire [8:0]y;
 
 	/** Control Unit **/
-	control_unit controlUnit(	.clock				(clock)
-,generate
-	genvar i;
-	for (i = 0; i < n; i = i + 1)
-	begin:identifier
-		
-	end
-endgenerate						.reset				(reset),
+	control_unit controlUnit(	.clock				(clock),
+								.reset				(reset),
 								.UARTstart			(UARTstart),
 								.FIFOready			(RAMready),
 								.PEmatch			(match),
@@ -52,7 +45,10 @@ endgenerate						.reset				(reset),
 							);
 	
 	/** Image ROM **/
-	
+	original_image_rom RAM(	.addr	(RAMtoRead),
+							.clk	(clock),
+							.out	(rowData)
+						  );
 			
 	/** Template ROM **/
 	template_image_rom ROM(	.addr	(ROMtoRead),
