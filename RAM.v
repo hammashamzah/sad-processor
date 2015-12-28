@@ -30,7 +30,7 @@ module RAM(clk, rst, data_in, data_out, wr_en,readAddr,RAM_full);
     if( rst )
       RAM_counter <= 0;
     else if( !RAM_full && wr_en )
-      RAM_counter <= RAM_counter + 1;
+      RAM_counter <= RAM_counter + `addrW'd1;
   end
 
   always @( posedge clk) begin
@@ -53,7 +53,7 @@ module RAM(clk, rst, data_in, data_out, wr_en,readAddr,RAM_full);
     end
     else begin
       if( !RAM_full && wr_en )    
-        writeAddr <= writeAddr + 1;
+        writeAddr <= writeAddr + `addrW'd1;
       else  
         writeAddr <= writeAddr;
     end
