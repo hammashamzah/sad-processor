@@ -4008,6 +4008,7 @@ module template_image_rom(
 			12'd3997: q <= 1'b1;
 			12'd3998: q <= 1'b1;
 			12'd3999: q <= 1'b1;
+			default : q <= 1'b0;
 		endcase	
 	end
 	assign out = q;

@@ -31,8 +31,14 @@ module topLevel_withoutIO
 	wire [8:0]y;
 
 	/** Control Unit **/
-	control_unit controlUnit(	.clock				(clock),
-								.reset				(reset),
+	control_unit controlUnit(	.clock				(clock)
+,generate
+	genvar i;
+	for (i = 0; i < n; i = i + 1)
+	begin:identifier
+		
+	end
+endgenerate						.reset				(reset),
 								.UARTstart			(UARTstart),
 								.FIFOready			(RAMready),
 								.PEmatch			(match),
