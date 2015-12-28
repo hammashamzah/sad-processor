@@ -65,7 +65,7 @@ module control_unit
 	/**** OUTPUT HANDLING ****/
 	/** processFinished and PEreset **/
 	assign processFinished = (ROMtoRead >= 12'd3999) || (!PEmatch);
-	assign PEreset = processFinished;
+	assign PEreset = processFinished || reset;
 	
 	/** nextRow **/
 	always @(state or currentRow or processFinished)
