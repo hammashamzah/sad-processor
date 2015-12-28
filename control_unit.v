@@ -19,16 +19,16 @@ module control_unit
 	input	FIFOready,
 	input	PEmatch,
 	input	UARTsendComplete,
+	output reg	[8:0]currentRow,
 	output reg	[8:0]RAMtoRead,
-	output	[11:0]ROMtoRead,
-	output	PEreset,
+	output		[11:0]ROMtoRead,
+	output		PEreset,
 	output reg	PEshift,
 	output reg	[1:0]UARTsend
 );
 
 	reg	[2:0]state,nextState;
-	reg	[8:0]currentRow,
-			 nextRow;
+	reg	[8:0]nextRow;
 	reg [6:0]rowTemplate;
 	reg [5:0]colTemplate;
 	wire	processFinished;
@@ -63,7 +63,7 @@ module control_unit
 	end
 
 	/**** OUTPUT HANDLING ****/
-	/** processFinishedImm, processFinished, and PEreset **/
+	/** processFinished and PEreset **/
 	assign processFinished = (ROMtoRead >= 12'd3999) || (!PEmatch);
 	assign PEreset = processFinished;
 	
@@ -75,6 +75,8 @@ module control_unit
 				nextRow <= processFinished? 9'd1 : 9'd0;
 			`NEXT_PROCESSING:
 				nextRow <= processFinished? (currentRow + 9'd1) : currentRow;
+			`FINISH_MATCH:
+				nextRow <= currentRow;
 			default:
 				nextRow <= 9'd0;
 		endcase

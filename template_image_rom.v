@@ -1,5 +1,4 @@
 module template_image_rom(
-	input data,
 	input [11:0] addr,
 	input clk,
 	output out
@@ -4008,7 +4007,7 @@ module template_image_rom(
 			12'd3996: q <= 1'b1;
 			12'd3997: q <= 1'b1;
 			12'd3998: q <= 1'b1;
-			12'd3999 : q <= 1'b1;
+			12'd3999: q <= 1'b1;
 		endcase	
 	end
 	assign out = q;

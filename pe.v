@@ -1,6 +1,6 @@
 
-module processing_element
-#(parameter THRESHOLD = 500)
+module pe
+#(parameter THRESHOLD = 10'd500)
 (
 	clk,
 	rst,	
@@ -24,7 +24,7 @@ module processing_element
 	input [9:0] in_s_2;
 
 	wire in_adder_1;
-	wire in_adder_2;
+	wire [9:0] in_adder_2;
 	wire [9:0] out_adder;
 	wire out_comp;
 	wire [9:0] in_reg;
