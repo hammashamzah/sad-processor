@@ -3,22 +3,19 @@
 `define	MATCH		2'd1
 `define NOT_MATCH	2'd2
 
-module topLevel_withoutUART
+module topLevel_withoutIO
 (
 	input	clock,
 	input 	reset,
 	input 	UARTstart,
+	input	RAMready,
 	input	UARTsendComplete,
-	input 	[7:0]data_in,
 	output	valid,
 	output reg	[9:0]x_out,
 	output reg	[8:0]y_out
 );
 
-	wire		ready,
-				writeEnable;
-	wire [8:0]	RAMtoRead,
-				RAMtoWrite;
+	wire [8:0]	RAMtoRead;
 	wire [11:0]	ROMtoRead;
 	wire [639:0]rowData,
 				rowInput;
@@ -37,7 +34,7 @@ module topLevel_withoutUART
 	control_unit controlUnit(	.clock				(clock),
 								.reset				(reset),
 								.UARTstart			(UARTstart),
-								.FIFOready			(ready),
+								.FIFOready			(RAMready),
 								.PEmatch			(match),
 								.UARTsendComplete	(UARTsendComplete),
 								.currentRow			(y),
@@ -47,17 +44,9 @@ module topLevel_withoutUART
 								.PEshift			(PEshift),
 								.UARTsend			(UARTsend)
 							);
-	/** Input Buffer **/
 	
+	/** Image ROM **/
 	
-	/** Image RAM **/
-	RAM RAM0(	.clock		(clock),
-				.wrEn		(writeEnable),
-				.data_in	(rowInput),
-				.readAddr	(RAMtoRead),
-				.writeAddr	(RAMtoWrite),
-				.data_out	(rowData)
-			);
 			
 	/** Template ROM **/
 	template_image_rom ROM(	.addr	(ROMtoRead),
