@@ -20,11 +20,9 @@ output reg  buf_full;
 
 reg[`buf_width-1:0]    fifo_counter;
 reg[`buf_width-1:0]    wr_ptr;   
-//reg buf_empty; 
-reg[`width-1:0]  buf_mem[0:`buf_size-1];
+reg[`width-1:0]  buf_mem[`buf_size-1:0];
 
-always @(fifo_counter)  begin
-//  buf_empty = (fifo_counter==0);
+always @(posedge clk)  begin
   buf_full =  (fifo_counter== `buf_size);
 end
 
