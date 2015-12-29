@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="top_level">
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_x|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_g6m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_y|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_dem.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_y|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_d6m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_x|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_dem.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_x|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_d6m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_y|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_0dm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_y|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_g6m.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|topLevel_withoutUART:top_level|template_image_rom:ROM|altsyncram:Ram0_rtl_0" CBX_FILE_NAME="altsyncram_k091.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|bcd:converter_x|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_0dm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|hardware|topLevel_withoutUART:top_level|RAM:RAM0|altsyncram:ram_rtl_0" CBX_FILE_NAME="altsyncram_4fc1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

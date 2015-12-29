@@ -1,4 +1,4 @@
-//`define IMPLEMENT
+`define IMPLEMENT
 
 `define START     4'b0000
 `define BIT0      4'b1000

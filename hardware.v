@@ -61,7 +61,7 @@ module hardware
 						.bcd1	(bcdx1),
 						.bcd2	(bcdx2)
 				   );
-	bcd converter_y(	.number	(y_out),
+	bcd converter_y(	.number	({1'b0,y_out}),
 						.bcd0	(bcdy0),
 						.bcd1	(bcdy1),
 						.bcd2	(bcdy2)
