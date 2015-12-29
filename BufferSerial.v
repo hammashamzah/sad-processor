@@ -22,7 +22,7 @@ reg[`buf_width-1:0]    fifo_counter;
 reg[`buf_width-1:0]    wr_ptr;   
 reg[`width-1:0]  buf_mem[`buf_size-1:0];
 
-always @(posedge clk)  begin
+always @(fifo_counter)  begin
   buf_full =  (fifo_counter== `buf_size);
 end
 
@@ -42,7 +42,7 @@ always @(posedge clk) begin
     buf_mem[wr_ptr] <= buf_mem[wr_ptr];
 end
 
-always@(posedge clk or posedge rst) begin
+always@(posedge clk) begin
   if( rst )
     wr_ptr <= 0;
   else begin

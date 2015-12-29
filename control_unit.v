@@ -128,16 +128,21 @@ module control_unit
 	end
 	
 	/** UARTsend **/
-	always @(posedge clock)
+	always @(state or nextState)
 	begin
-		case(state)
-			`FINISH_MATCH:
-				UARTsend <= `MATCH;
-			`FINISH_NOTMATCH:
-				UARTsend <= `NOT_MATCH;
-			default:
-				UARTsend <= `OFF;
-		endcase
+		if(state == `NEXT_PROCESSING)
+		begin
+			case(nextState)
+				`FINISH_MATCH:
+					UARTsend <= `MATCH;
+				`FINISH_NOTMATCH:
+					UARTsend <= `NOT_MATCH;
+				default:
+					UARTsend <= `OFF;
+			endcase
+		end
+		else
+			UARTsend <= `OFF;
 	end
 	
 endmodule 
