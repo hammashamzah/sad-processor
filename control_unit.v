@@ -24,10 +24,11 @@ module control_unit
 	output		[11:0]ROMtoRead,
 	output		PEreset,
 	output reg	PEshift,
-	output reg	[1:0]UARTsend
+	output reg	[1:0]UARTsend,
+	output reg	[2:0]state
 );
 
-	reg	[2:0]state,nextState;
+	reg	[2:0]nextState;
 	reg	[8:0]nextRow;
 	reg [6:0]rowTemplate;
 	reg [5:0]colTemplate;

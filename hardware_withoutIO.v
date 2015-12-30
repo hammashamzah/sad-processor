@@ -1,0 +1,130 @@
+/** state **/
+`define IDLE				3'd0
+`define INPUT				3'd1
+`define	FIRST_PROCESSING	3'd2
+`define NEXT_PROCESSING		3'd3
+`define FINISH_MATCH		3'd4
+`define FINISH_NOTMATCH		3'd5
+
+module hardware_withoutIO
+(
+	input 	clock,
+	input	notReset,
+	input	dataStart,
+	input	dataReady,
+	input	sendComplete,
+	output	valid,
+	output	ledIdle,
+	output	ledInput,
+	output	ledFirst,
+	output	ledNext,
+	output	ledMatch,
+	output	ledNotMatch,
+	output reg	[6:0]segmentx0,
+	output reg	[6:0]segmentx1,
+	output reg	[6:0]segmentx2,
+	output reg	[6:0]segmenty0,
+	output reg	[6:0]segmenty1,
+	output reg	[6:0]segmenty2
+);
+
+	wire reset = !notReset;
+	
+	wire	UARTStart = !dataStart;
+	wire	UARTReady = !dataReady;
+	wire	[7:0]dataIn;
+	wire	UARTsendComplete = !sendComplete;
+	
+	wire	[9:0]x_out;
+	wire	[8:0]y_out;
+	
+	wire	[3:0]	bcdx0,
+					bcdx1,
+					bcdx2;
+	wire	[6:0]	segx0,
+					segx1,
+					segx2;
+	
+	wire	[3:0]	bcdy0,
+					bcdy1,
+					bcdy2;
+	wire	[6:0]	segy0,
+					segy1,
+					segy2;
+	
+	wire	[2:0]state;
+
+	topLevel_withoutIO top_level(	.clock				(clock),
+									.reset				(reset),
+									.UARTstart			(UARTStart),
+									.RAMready			(UARTReady),
+									.UARTsendComplete	(UARTsendComplete),
+									.valid				(valid),
+									.state				(state),
+									.x_out				(x_out),
+									.y_out				(y_out)
+								  );
+	
+	/** Binary to BCD Converter **/
+	bcd converter_x(	.number	(x_out),
+						.bcd0	(bcdx0),
+						.bcd1	(bcdx1),
+						.bcd2	(bcdx2)
+				   );
+	bcd converter_y(	.number	({1'b0,y_out}),
+						.bcd0	(bcdy0),
+						.bcd1	(bcdy1),
+						.bcd2	(bcdy2)
+				   );
+	
+	/** Seven-segment converter **/
+	bcdto7seg segx0conv(	.bcd	(bcdx0),
+							.seg	(segx0));
+	bcdto7seg segx1conv(	.bcd	(bcdx1),
+							.seg	(segx1));
+	bcdto7seg segx2conv(	.bcd	(bcdx2),
+							.seg	(segx2));
+	bcdto7seg segy0conv(	.bcd	(bcdy0),
+							.seg	(segy0));
+	bcdto7seg segy1conv(	.bcd	(bcdy1),
+							.seg	(segy1));
+	bcdto7seg segy2conv(	.bcd	(bcdy2),
+							.seg	(segy2));
+	
+	/** Output register **/
+	always @(posedge clock)
+	begin
+		if(reset)
+		begin
+			//sendComplete <= 1'b0;
+			
+			segmentx0 <= 7'b1111111;
+			segmentx1 <= 7'b1111111;
+			segmentx2 <= 7'b1111111;
+			
+			segmenty0 <= 7'b1111111;
+			segmenty1 <= 7'b1111111;
+			segmenty2 <= 7'b1111111;
+		end
+		else if(valid)
+		begin
+			//sendComplete <= 1'b1;
+		
+			segmentx0 <= segx0;
+			segmentx1 <= segx1;
+			segmentx2 <= segx2;
+			
+			segmenty0 <= segy0;
+			segmenty1 <= segy1;
+			segmenty2 <= segy2;
+		end
+	end
+	
+	assign ledIdle		= (state == `IDLE)? 			1'b1 : 1'b0;
+	assign ledInput		= (state == `INPUT)? 			1'b1 : 1'b0;
+	assign ledFirst		= (state == `FIRST_PROCESSING)?	1'b1 : 1'b0;
+	assign ledNext		= (state == `NEXT_PROCESSING)?	1'b1 : 1'b0;
+	assign ledMatch		= (state == `FINISH_MATCH)?		1'b1 : 1'b0;
+	assign ledNotMatch	= (state == `FINISH_NOTMATCH)?	1'b1 : 1'b0;
+	
+endmodule 

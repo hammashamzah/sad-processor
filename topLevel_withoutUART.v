@@ -13,7 +13,8 @@ module topLevel_withoutUART
 	input	[7:0]data_in,
 	output reg	valid_out,
 	output reg	[9:0]x_out,
-	output reg	[8:0]y_out
+	output reg	[8:0]y_out,
+	output	[2:0]state
 );
 
 	wire	bufFull;
@@ -47,7 +48,8 @@ module topLevel_withoutUART
 								.ROMtoRead			(ROMtoRead),
 								.PEreset			(PEreset),
 								.PEshift			(PEshift),
-								.UARTsend			(UARTsend)
+								.UARTsend			(UARTsend),
+								.state				(state)
 							);
 	
 	/** Input Buffer **/

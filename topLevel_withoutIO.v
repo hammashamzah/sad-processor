@@ -11,6 +11,7 @@ module topLevel_withoutIO
 	input	RAMready,
 	input	UARTsendComplete,
 	output	valid,
+	output	[2:0]state,
 	output reg	[9:0]x_out,
 	output reg	[8:0]y_out
 );
@@ -41,7 +42,8 @@ module topLevel_withoutIO
 								.ROMtoRead			(ROMtoRead),
 								.PEreset			(PEreset),
 								.PEshift			(PEshift),
-								.UARTsend			(UARTsend)
+								.UARTsend			(UARTsend),
+								.state				(state)
 							);
 	
 	/** Image ROM **/

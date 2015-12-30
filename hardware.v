@@ -1,9 +1,23 @@
+/** state **/
+`define IDLE				3'd0
+`define INPUT				3'd1
+`define	FIRST_PROCESSING	3'd2
+`define NEXT_PROCESSING		3'd3
+`define FINISH_MATCH		3'd4
+`define FINISH_NOTMATCH		3'd5
+
 module hardware
 (
 	input 	clock,
 	input	notReset,
 	input	RxD,
 	output	valid,
+	output	ledIdle,
+	output	ledInput,
+	output	ledFirst,
+	output	ledNext,
+	output	ledMatch,
+	output	ledNotMatch,
 	output reg	[6:0]segmentx0,
 	output reg	[6:0]segmentx1,
 	output reg	[6:0]segmentx2,
@@ -35,6 +49,8 @@ module hardware
 	wire	[6:0]	segy0,
 					segy1,
 					segy2;
+	
+	wire	[2:0]state;
 
 	async_receiver UART_Rx(	.clk			(clock),
 							.rst			(reset),
@@ -52,7 +68,8 @@ module hardware
 									.data_in			(dataIn),
 									.valid_out			(valid),
 									.x_out				(x_out),
-									.y_out				(y_out)
+									.y_out				(y_out),
+									.state				(state)
 								  );
 	
 	/** Binary to BCD Converter **/
@@ -109,5 +126,12 @@ module hardware
 			segmenty2 <= segy2;
 		end
 	end
+	
+	assign ledIdle		= (state == `IDLE)? 			1'b1 : 1'b0;
+	assign ledInput		= (state == `INPUT)? 			1'b1 : 1'b0;
+	assign ledFirst		= (state == `FIRST_PROCESSING)?	1'b1 : 1'b0;
+	assign ledNext		= (state == `NEXT_PROCESSING)?	1'b1 : 1'b0;
+	assign ledMatch		= (state == `FINISH_MATCH)?		1'b1 : 1'b0;
+	assign ledNotMatch	= (state == `FINISH_NOTMATCH)?	1'b1 : 1'b0;
 	
 endmodule 

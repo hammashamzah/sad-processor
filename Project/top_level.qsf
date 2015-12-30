@@ -99,7 +99,7 @@ set_location_assignment PIN_AB18 -to segmenty2[4]
 set_location_assignment PIN_AB19 -to segmenty2[5]
 set_location_assignment PIN_AE19 -to segmenty2[6]
 set_global_assignment -name USE_CONFIGURATION_DEVICE ON
-set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED WITH WEAK PULL-UP"
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
 set_global_assignment -name VERILOG_FILE ../vertical_processor.v
 set_global_assignment -name VERILOG_FILE ../topLevel_withoutUART.v
 set_global_assignment -name VERILOG_FILE ../template_image_rom.v
@@ -113,4 +113,11 @@ set_global_assignment -name VERILOG_FILE ../bcdto7seg.v
 set_global_assignment -name VERILOG_FILE ../bcd.v
 set_global_assignment -name VERILOG_FILE ../BaudTickGen.v
 set_global_assignment -name VERILOG_FILE ../async_receiver.v
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_AJ5 -to ledFirst
+set_location_assignment PIN_AJ6 -to ledIdle
+set_location_assignment PIN_AK5 -to ledInput
+set_location_assignment PIN_AJ4 -to ledNext
+set_location_assignment PIN_AK3 -to ledMatch
+set_location_assignment PIN_AH4 -to ledNotMatch
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -1,5 +1,5 @@
 Assembler report for top_level
-Tue Dec 29 17:12:17 2015
+Wed Dec 30 11:54:07 2015
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,8 +10,8 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: D:/Documents/GitHub/sad-processor/Project Files/output_files/top_level.sof
-  6. Assembler Device Options: D:/Documents/GitHub/sad-processor/Project Files/output_files/top_level.pof
+  5. Assembler Device Options: D:/Documents/sad-processor/Project/output_files/top_level.sof
+  6. Assembler Device Options: D:/Documents/sad-processor/Project/output_files/top_level.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Tue Dec 29 17:12:17 2015 ;
+; Assembler Status      ; Successful - Wed Dec 30 11:54:07 2015 ;
 ; Revision Name         ; top_level                             ;
 ; Top-level Entity Name ; hardware                              ;
 ; Family                ; Cyclone II                            ;
@@ -78,37 +78,37 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+----------------------------------------------------------------------------+
-; Assembler Generated Files                                                  ;
-+----------------------------------------------------------------------------+
-; File Name                                                                  ;
-+----------------------------------------------------------------------------+
-; D:/Documents/GitHub/sad-processor/Project Files/output_files/top_level.sof ;
-; D:/Documents/GitHub/sad-processor/Project Files/output_files/top_level.pof ;
-+----------------------------------------------------------------------------+
++---------------------------------------------------------------+
+; Assembler Generated Files                                     ;
++---------------------------------------------------------------+
+; File Name                                                     ;
++---------------------------------------------------------------+
+; D:/Documents/sad-processor/Project/output_files/top_level.sof ;
+; D:/Documents/sad-processor/Project/output_files/top_level.pof ;
++---------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: D:/Documents/GitHub/sad-processor/Project Files/output_files/top_level.sof ;
-+----------------+-------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                             ;
-+----------------+-------------------------------------------------------------------------------------+
-; Device         ; EP2C70F896C6                                                                        ;
-; JTAG usercode  ; 0x017AC8F8                                                                          ;
-; Checksum       ; 0x017AC8F8                                                                          ;
-+----------------+-------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------+
+; Assembler Device Options: D:/Documents/sad-processor/Project/output_files/top_level.sof ;
++----------------+------------------------------------------------------------------------+
+; Option         ; Setting                                                                ;
++----------------+------------------------------------------------------------------------+
+; Device         ; EP2C70F896C6                                                           ;
+; JTAG usercode  ; 0x0178C57E                                                             ;
+; Checksum       ; 0x0178C57E                                                             ;
++----------------+------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: D:/Documents/GitHub/sad-processor/Project Files/output_files/top_level.pof ;
-+--------------------+---------------------------------------------------------------------------------+
-; Option             ; Setting                                                                         ;
-+--------------------+---------------------------------------------------------------------------------+
-; Device             ; EPCS16                                                                          ;
-; JTAG usercode      ; 0x00000000                                                                      ;
-; Checksum           ; 0x16E4B9B0                                                                      ;
-; Compression Ratio  ; 2                                                                               ;
-+--------------------+---------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------+
+; Assembler Device Options: D:/Documents/sad-processor/Project/output_files/top_level.pof ;
++--------------------+--------------------------------------------------------------------+
+; Option             ; Setting                                                            ;
++--------------------+--------------------------------------------------------------------+
+; Device             ; EPCS16                                                             ;
+; JTAG usercode      ; 0x00000000                                                         ;
+; Checksum           ; 0x16FDB7E2                                                         ;
+; Compression Ratio  ; 2                                                                  ;
++--------------------+--------------------------------------------------------------------+
 
 
 +--------------------+
@@ -117,14 +117,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Dec 29 17:12:12 2015
+    Info: Processing started: Wed Dec 30 11:53:53 2015
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off template_matching -c top_level
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 519 megabytes
-    Info: Processing ended: Tue Dec 29 17:12:18 2015
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:05
+    Info: Peak virtual memory: 544 megabytes
+    Info: Processing ended: Wed Dec 30 11:54:07 2015
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:13
 
 
